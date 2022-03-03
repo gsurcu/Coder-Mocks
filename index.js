@@ -1,18 +1,13 @@
-import express from "express";
-import { createServer } from "http";
-import { Server } from "socket.io";
+const express = require('express')
+const http = require('http')
+const path = require('path')
 import { router } from "./routers/app.routers.js";
 import { ProductosApi } from "./models/productos/productos.api.js";
 import { ChatApi } from "./models/chat/chat.api.js";
-import path from "path"
-import {fileURLToPath} from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express()
-const httpServer = createServer(app)
-const io = new Server(httpServer)
+const server = http.createServer(app)
+const io = require('socket.io')(server)
 
 const chat = new ChatApi("chat")
 const productos = new ProductosApi("productos")
@@ -41,4 +36,4 @@ io.on('connection', socket => {
 
 const emitir = () => io.sockets.emit("chat", chat)
 
-httpServer.listen(PORT, () => { console.log(`Running on port: ${PORT}`)})
+server.listen(PORT, () => { console.log(`Running on port: ${PORT}`)})

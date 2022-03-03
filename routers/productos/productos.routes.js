@@ -1,14 +1,14 @@
 import express from 'express';
 import { listarProductosPorIdController, guardarProductoController, actualizarProductoController, eliminarProductoController } from '../../controllers/productos.controllers.js';
 
-const rutasProductos = express.Router();
+const router = express.Router();
 
-rutasProductos.get('/:id?', listarProductosPorIdController);
+router.get('/:id?', listarProductosPorIdController);
 
-rutasProductos.post('/', guardarProductoController);
+router.post('/', guardarProductoController);
 
-rutasProductos.put('/:id', actualizarProductoController);
+router.put('/:id', actualizarProductoController);
 
-rutasProductos.delete('/:id', eliminarProductoController);
+router.delete('/:id', eliminarProductoController);
 
-export default rutasProductos
+module.exports = router;

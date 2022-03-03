@@ -1,15 +1,14 @@
-import { ProductosApi } from "../models/productos/productos.api.js";
-
-const productosApi = new ProductosApi("productos");
+const { ProductosDaoMongoDb } = require('../models/index')
+const productosApi = new ProductosDaoMongoDb("productos");
 
 const listarProductosPorIdController = async (req, res) => {
   const { id } = req.params;
   if (id) {
     console.log(id)
-    const producto = await productosApi.listarPorIdOTodo(id);
+    const producto = await productosApi.listar(id);
     return res.status(200).json(producto);
   }
-  const producto = await productosApi.listarPorIdOTodo();
+  const producto = await productosApi.listarAll();
   return res.status(200).json(producto);
 };
 
