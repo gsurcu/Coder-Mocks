@@ -1,5 +1,7 @@
-import express from 'express';
-import { listarProductosPorIdController, guardarProductoController, actualizarProductoController, eliminarProductoController } from '../../controllers/productos.controllers.js';
+const express = require('express')
+// import express from 'express';
+const { listarProductosPorIdController, guardarProductoController, actualizarProductoController, eliminarProductoController } = require('../../controllers/productos.controllers')
+// import { listarProductosPorIdController, guardarProductoController, actualizarProductoController, eliminarProductoController } from '../../controllers/productos.controllers.js';
 
 const router = express.Router();
 

@@ -1,6 +1,7 @@
 const express = require('express')
 const { ProductosDaoMongoDb } = require('../models/index')
 const rutasProductos = require('./productos/productos.routes')
+const generarProductosRandom = require('./productos/producto.test')
 
 const router = express.Router();
 const productos = new ProductosDaoMongoDb("productos")
@@ -11,12 +12,7 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 // Rutas
-router.get('/api/productos-test', async (req, res) => {
-  const listaProductos = await productos.listarPorIdOTodo()
-  res.render('index', {
-    listaProductos,
-  });
-});
+router.get('/api/productos-test', generarProductosRandom);
 router.use('/api/productos', rutasProductos);
 router.use('/api/*', (req, res) => {
   res.status(404).json({

@@ -1,22 +1,23 @@
 const express = require('express')
 const http = require('http')
 const path = require('path')
-import { router } from "./routers/app.routers.js";
-import { ProductosApi } from "./models/productos/productos.api.js";
-import { ChatApi } from "./models/chat/chat.api.js";
+const router = require('./routers/app.routers')
+// import { router } from "./routers/app.routers.js";
+const { ProductosDaoMongoDb } = require('./models/index')
+// import { ProductosApi } from "./models/productos/productos.api.js";
+const { ChatDaoMongoDb } = require('./models/index')
+// import { ChatApi } from "./models/daos/chat/ChatDaoMongoDb.js";
 
 const app = express()
 const server = http.createServer(app)
 const io = require('socket.io')(server)
 
-const chat = new ChatApi("chat")
-const productos = new ProductosApi("productos")
+const chat = new ChatDaoMongoDb("chat")
+const productos = new ProductosDaoMongoDb("productos")
 const PORT = process.env.PORT || 8080;
 
 
 // Template Engines
-// app.set('views', './view');
-// app.set('view engine', 'pug');
 app.use('/static', express.static(__dirname + '/public'));
 
 // Rutas

@@ -50,7 +50,7 @@ const eliminarProductoController = async (req, res) => {
   }
 };
 
-export {
+module.exports = {
   listarProductosPorIdController,
   guardarProductoController,
   actualizarProductoController,

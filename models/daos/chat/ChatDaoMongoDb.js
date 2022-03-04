@@ -1,27 +1,23 @@
-const {configSQLite3} = require('../../../database/config')
-const knex = require('knex')
+const ContenedorMongoDb = require('../../contenedores/ContenedorMongoDb')
+const mongoose = require('mongoose')
 
-class ChatDaoMongoDb {
-  constructor(tableName) {
-    this.knex = knex(configSQLite3);
-    this.tableName = tableName;
-  }
-  async addMessage(message) {
-    try {
-      const result = await this.knex(this.tableName).insert(message);
-      return result;
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
+const Schema = mongoose.Schema;
+const collection = "chat"
+const chatSchema = new Schema({
+  author: {
+    id: {type: String},
+    nombre: {type: String},
+    apellido: {type: String},
+    edad: {type: Number},
+    alias: {type: String},
+    avatar: {type: String}
+  },
+  text: {type: String}
+})
 
-  async getMessage() {
-    try {
-      const result = await this.knex.from(this.tableName).select("*");
-      return result;
-    } catch (error) {
-      console.log(error.message);
-    }
+class ChatDaoMongoDb extends ContenedorMongoDb {
+  constructor() {
+    super(collection,chatSchema)
   }
 }
 
