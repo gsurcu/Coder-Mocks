@@ -1,9 +1,13 @@
-const config = require('../../config/config')
-// import { config } from "../../config/config.js";
-const mongoose = require('mongoose')
-// import mongoose from "mongoose";
+const config = require('../../config/config');
+const mongoose = require('mongoose');
 
-await mongoose.connect(config.mongodb);
+(async () => {
+  try {
+    await mongoose.connect(config.mongodb);
+  } catch (error) {
+    console.log(error.message)
+  }
+})();
 
 class ContenedorMongoDb {
 

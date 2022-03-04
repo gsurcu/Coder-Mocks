@@ -9,7 +9,7 @@ const generarProductosRandom = async (req, res) => {
     list.push({
       nombre: commerce.product(),
       precio: commerce.price( 1, 1000, 1,'$'),
-      foto: image.imageUrl()
+      foto: image.imageUrl(1234, 2345, 'producto', true)
     })
   }
 
